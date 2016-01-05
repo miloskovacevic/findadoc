@@ -1,0 +1,34 @@
+doctype strict
+html
+head
+    title= title
+    link(rel='stylesheet', type='text/css', href='/stylesheets/style.css', media='screen')
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src="/javascript/main.js")
+  body
+    #wrap
+      #header
+        h1
+          a(href="#") FindaDoc
+        h2 Search for local doctors
+      #menu
+        ul
+          li
+            a(href="/") Home
+          li
+            a(href="/doctors") Browse doctors
+          li
+            a(href="/doctors/add") Add Doctor
+          li
+            a(href="/categories/add") Add Category
+      #content
+        .left
+          block content
+        .right
+          include ./includes/categories.jade
+        div(style='clear: both;')
+      #footer
+        | Designed by
+        a(href='http://www.free-css-templates.com/') Free CSS Templates
+        | ,  Thanks to
+        a(href='http://www.openwebdesign.org/') custom web design
