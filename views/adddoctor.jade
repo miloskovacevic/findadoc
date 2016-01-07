@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  form(method='post' action='/doctors/add' class='addForm')
+    h3 Doctor Info
+    div
+      label Full Name:
+      input(type="text", name="full_name")
+    div
+      label Category:
+      select(name="category")
+        option(value="General") General
+    div
+      label Accepting New Patients:
+      select(name="new_patents")
+        option(value="Yes") Yes
+        option(value="No") No
+    div
+      label Practice Name:
+      input(type="text", name="practice_name")
+    div
+      label Graduation Year:
+      input(type="text", name="grad_year")
+    div
+      label Street Address:
+      input(type="text", name="street_address")
+    div
+      label City:
+      input(type="text", name="city")
+    div
+      label State:
+      input(type="text", name="state")
+    div
+      label Zip Code:
+      input(type="text", name="zip")
+      br
+    div
+      input(type="submit", value="Add Doctor")

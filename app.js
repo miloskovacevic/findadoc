@@ -6,11 +6,22 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var session = require('express-session');
+var flash = require('connect-flash');
+var cassandra = require('cassandra-driver');
+
+
 var app = express();
+
+var client = new cassandra.Client({contactPoints:['127.0.0.1']});
+client.connect(function (err, result) {
+    console.log('Cassandra Connected!');
+});
 
 //rute
 var index = require('./routes/index');
 var doctors = require('./routes/doctors');
+var categories = require('./routes/categories');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,8 +34,24 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
+
+app.use(flash());
+
+app.use(function (req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
+
+
+
 app.use('/', index);
 app.use('/doctors', doctors);
+app.use('/categories', categories);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
