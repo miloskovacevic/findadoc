@@ -28,6 +28,8 @@ router.get('/add', function(req, res){
     res.render('adddoctor');
 });
 
+
+
 router.get('/details/:id', function (req, res) {
     console.log('Pritisnuo na id: ' + req.params.id);
     var query = 'SELECT * FROM findadoc.doctors WHERE doc_id = ?';
@@ -40,7 +42,23 @@ router.get('/details/:id', function (req, res) {
             });
         }
     });
-
 });
+
+//route /doctors/categories/:cat_id
+router.get('/category/:name', function (req, res) {
+    console.log('Pritisnuo na kategoriju: ' + req.params.name);
+    var query = 'SELECT * FROM findadoc.doctors WHERE category = ?';
+    client.execute(query, [req.params.name], function (err, results) {
+        if(err){
+            res.status(404).send({msg: err});
+        }else {
+            res.render('doctors', {
+                doctors: results.rows
+            });
+        }
+    });
+});
+
+
 
 module.exports = router;
