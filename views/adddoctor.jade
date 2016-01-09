@@ -9,10 +9,11 @@ block content
     div
       label Category:
       select(name="category")
-        option(value="General") General
+       each cat, i in category
+        option(value='#{cat.name}') #{cat.name}
     div
       label Accepting New Patients:
-      select(name="new_patents")
+      select(name="new_patients")
         option(value="Yes") Yes
         option(value="No") No
     div

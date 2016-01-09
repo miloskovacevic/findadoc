@@ -23,6 +23,7 @@ head
             a(href="/categories/add") Add Category
       #content
         .left
+          !=messages()
           block content
         .right
           include ./includes/categories.jade
